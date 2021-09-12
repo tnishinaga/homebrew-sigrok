@@ -18,7 +18,7 @@ class Libsigrok < Formula
   depends_on "libserialport"
   depends_on "libusb"
   depends_on "libzip"
-  depends_on "sigrok-firmware-fx2lafw"
+  depends_on "tnishinaga/sigrok/sigrok-firmware-fx2lafw"
 
   patch :p1 do
     url 'https://gist.githubusercontent.com/tnishinaga/731e49de0907b5e497039f513f064f00/raw/51c07cdfb53f5f57e8829445f96e498406aaae26/support-glibmm-268.patch'
