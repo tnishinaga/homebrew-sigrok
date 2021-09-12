@@ -6,6 +6,8 @@ class Libsigrok < Formula
   url "https://sigrok.org/download/source/libsigrok/libsigrok-0.5.2.tar.gz"
   sha256 "4d341f90b6220d3e8cb251dacf726c41165285612248f2c52d15df4590a1ce3c"
 
+  depends_on "automake" => :build
+  depends_on "autoconf" => :build
   depends_on "doxygen" => :build
   depends_on "make" => :build
   depends_on "gettext" => [:buld, :test]
@@ -18,8 +20,13 @@ class Libsigrok < Formula
   depends_on "libzip"
   depends_on "sigrok-firmware-fx2lafw"
 
+  patch :p1 do
+    url 'https://gist.githubusercontent.com/tnishinaga/731e49de0907b5e497039f513f064f00/raw/51c07cdfb53f5f57e8829445f96e498406aaae26/support-glibmm-268.patch'
+  end
+
   def install
-    system "./configure", "--prefix=#{prefix}", "--disable-java"
+    system "sed", "-i", "-e", "s/glibmm-2.4/glibmm-2.68/g", "configure"
+    system "./configure", "--prefix=#{prefix}", "--disable-java", "--enable-bindings", "--enable-cxx", "CXXFLAGS=-std=c++17"
     system "make"
     system "make", "install"
   end
