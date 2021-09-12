@@ -19,6 +19,9 @@ class Libsigrokdecode < Formula
   depends_on "python@3.9"
 
   def install
+    ENV["PYTHON3"] = Formula["python@3.9"].opt_bin/"python3"
+
+    system "sed", "-i", "-e", "s/@SRD_PKGLIBS@/python3-embed/g", "libsigrokdecode.pc.in"
     system "./autogen.sh"
     system "./configure", "--prefix=#{prefix}"
     system "make"
