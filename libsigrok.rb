@@ -13,19 +13,19 @@ class Libsigrok < Formula
   depends_on "gettext" => [:buld, :test]
   depends_on "pkg-config" => [:buld, :test]
   depends_on "glib"
-  depends_on "glibmm"
+  depends_on "glibmm@2.66"
   depends_on "libftdi"
   depends_on "libserialport"
   depends_on "libusb"
   depends_on "libzip"
   depends_on "tnishinaga/sigrok/sigrok-firmware-fx2lafw"
 
-  patch :p1 do
-    url 'https://gist.githubusercontent.com/tnishinaga/731e49de0907b5e497039f513f064f00/raw/51c07cdfb53f5f57e8829445f96e498406aaae26/support-glibmm-268.patch'
-  end
+  # patch :p1 do
+    # url 'https://gist.githubusercontent.com/tnishinaga/731e49de0907b5e497039f513f064f00/raw/51c07cdfb53f5f57e8829445f96e498406aaae26/support-glibmm-268.patch'
+  # end
 
   def install
-    system "sed", "-i", "-e", "s/glibmm-2.4/glibmm-2.68/g", "configure"
+    # system "sed", "-i", "-e", "s/glibmm-2.4/glibmm-2.68/g", "configure"
     system "./configure", "--prefix=#{prefix}", "--disable-java", "--enable-bindings", "--enable-cxx", "CXXFLAGS=-std=c++17"
     system "make"
     system "make", "install"
