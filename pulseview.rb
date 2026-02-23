@@ -1,9 +1,9 @@
 class Pulseview < Formula
-    desc ""
-    homepage ""
-    url "https://sigrok.org/download/source/pulseview/pulseview-0.4.2.tar.gz"
-    sha256 "f042f77a3e1b35bf30666330e36ec38fab8d248c3693c37b7e35d401c3bfabcb"
-    head "git://sigrok.org/pulseview"
+    desc "Qt based LA/scope/MSO GUI"
+    homepage "https://sigrok.org/"
+    license "GPL-3.0-or-later"
+    # The stable version cannot be built because it doesn't support >= CMake 3.5.
+    head "git://sigrok.org/pulseview.git"
   
     depends_on "qt@5"
     depends_on "cmake" => :build
@@ -14,9 +14,11 @@ class Pulseview < Formula
     depends_on "libzip" => :build
     depends_on "glibmm@2.66" => :build
     depends_on "libsigc++@2" => :build
-    depends_on "libserialport" => :build
-    depends_on "tnishinaga/sigrok/libsigrok" => :build
-    depends_on "tnishinaga/sigrok/libsigrokdecode"
+    # install following libraries with --HEAD before install pulseview
+    depends_on "libsigrok"
+    depends_on "libsigrokdecode"
+    depends_on "libserialport"
+
   
     def install
         # Qt5 requires c++11 (and the other backends do not care)
